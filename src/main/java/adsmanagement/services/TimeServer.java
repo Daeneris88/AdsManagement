@@ -1,7 +1,10 @@
 package adsmanagement.services;
 
+import java.util.Date;
+
 public class TimeServer {
-    public String getDate() {
-        return null;
+
+    public Date getdate() {
+        return new Date();
     }
 }

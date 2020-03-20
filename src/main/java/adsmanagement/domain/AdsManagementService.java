@@ -2,6 +2,7 @@ package adsmanagement.domain;
 
 import adsmanagement.InMemoryRepository;
 import adsmanagement.domain.ads.Ad;
+import adsmanagement.domain.adsManagement.AdsManagement;
 import adsmanagement.domain.ads.Body;
 import adsmanagement.domain.ads.Title;
 import adsmanagement.services.Id;
@@ -20,9 +21,8 @@ public class AdsManagementService {
     }
 
     public void addAd(Title title, Body body, Date timeserver, Id id) {
-        AdsList adsList = new AdsList(catalogRepository);
-        adsList.checkRepository();
-
+        AdsManagement adsManagement = new AdsManagement(catalogRepository);
+        adsManagement.checkRepository(catalogRepository);
         Ad ad = new Ad(title,  body, timeserver, id);
         catalogRepository.save(id, ad);
     }
@@ -30,6 +30,11 @@ public class AdsManagementService {
     public void remove(Id id){
         Ad ad = catalogRepository.get(id);
         catalogRepository.remove(id);
+    }
+
+    public Ad getAdd(Id id){
+       Ad ad = catalogRepository.get(id);
+       return ad;
     }
 
 

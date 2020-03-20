@@ -46,12 +46,12 @@ public class InMemoryRepositoryShould {
         Title title = new Title("title");
         Body body = new Body("body");
         Id id = new Id("1");
-        Title titlle1 = new Title("Hola");
+        Title title1 = new Title("Hola");
         Body body1 = new Body("Body1");
         Id id1 = new Id("2");
 
         Ad expectedAd = new Ad(title, body, new Date(), id);
-        Ad ad = new Ad(titlle1, body1, new Date(), id1);
+        Ad ad = new Ad(title1, body1, new Date(), id1);
         InMemoryRepository inMemoryRepository = new InMemoryRepository();
         inMemoryRepository.save(id, expectedAd);
         inMemoryRepository.save(id1, ad);
