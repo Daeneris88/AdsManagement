@@ -1,7 +1,6 @@
 package adsmanagement;
 import adsmanagement.domain.ads.Ad;
 import adsmanagement.services.Id;
-import javax.naming.InitialContext;
 import java.util.*;
 
 public class InMemoryRepository {
@@ -28,8 +27,8 @@ public class InMemoryRepository {
         while (catalogIterator.hasNext()) {
             Map.Entry mapElement = (Map.Entry) catalogIterator.next();
             adsList.add((Ad) mapElement.getValue());
-
         }
         return adsList;
     }
+
 }

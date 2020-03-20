@@ -25,6 +25,12 @@ public class Ad{
         if(title.toString().equals(body.toString())) throw new TitleAndBodyEquality();
         return ad;
     }
+    public Id getId(){
+       return this.id;
+    }
+    public Date getDate() {
+        return  this.date;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,4 +57,6 @@ public class Ad{
                 ", id=" + id +
                 '}';
     }
+
+
 }
