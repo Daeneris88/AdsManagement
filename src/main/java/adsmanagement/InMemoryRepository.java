@@ -11,7 +11,10 @@ public class InMemoryRepository {
     }
 
     public Ad get(Id id) {
-        if(catalogRepository.containsKey(id)) return catalogRepository.get(id);
+        if(catalogRepository.containsKey(id)) {
+            catalogRepository.get(id).getViews();
+            return catalogRepository.get(id);
+        }
         return null;
     }
 
@@ -22,7 +25,7 @@ public class InMemoryRepository {
     public List getAll() {
 
         List<Ad> adsList = new ArrayList<Ad>();
-        Iterator catalogIterator =catalogRepository.entrySet().iterator();
+        Iterator catalogIterator = catalogRepository.entrySet().iterator();
 
         while (catalogIterator.hasNext()) {
             Map.Entry mapElement = (Map.Entry) catalogIterator.next();

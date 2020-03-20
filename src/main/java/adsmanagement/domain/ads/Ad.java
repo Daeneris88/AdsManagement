@@ -12,12 +12,14 @@ public class Ad{
     private Body body;
     private Date date;
     private Id id;
+    private Integer views;
 
     public Ad(Title title, Body body, Date date, Id id) {
         this.title = title;
         this.body = body;
         this.date = date;
         this.id = id;
+        this.views = 0;
     }
 
     public Ad add(Ad ad) throws TooManyCharacters, TitleAndBodyEquality {
@@ -32,20 +34,30 @@ public class Ad{
         return  this.date;
     }
 
+    public Integer getViews() {
+        return  this.views++;
+    }
+
+    public Integer views() {
+        return  this.views;
+    }
+
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ad ad = (Ad) o;
         return Objects.equals(title, ad.title) &&
                 Objects.equals(body, ad.body) &&
                 Objects.equals(date, ad.date) &&
-                Objects.equals(id, ad.id);
+                Objects.equals(id, ad.id) &&
+                Objects.equals(views, ad.views);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, body, date, id);
+        return Objects.hash(title, body, date, id, views);
     }
 
     @Override
@@ -55,8 +67,10 @@ public class Ad{
                 ", body=" + body +
                 ", date=" + date +
                 ", id=" + id +
+                ", views=" + views +
                 '}';
     }
-
-
 }
+
+
+

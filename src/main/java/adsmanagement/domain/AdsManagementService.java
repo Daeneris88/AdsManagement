@@ -37,5 +37,8 @@ public class AdsManagementService {
        return ad;
     }
 
-
+    public void removeOldAds(Date timeserver){
+        AdsManagement adsManagement = new AdsManagement(catalogRepository);
+        adsManagement.cleanAds(timeserver, catalogRepository);
+    }
 }

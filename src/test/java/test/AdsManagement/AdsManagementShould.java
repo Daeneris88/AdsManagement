@@ -35,8 +35,8 @@ public class AdsManagementShould {
         InMemoryRepository inMemoryRepository = new InMemoryRepository();
         inMemoryRepository.save(id, expectedAd);
         inMemoryRepository.save(id1, ad);
-
         AdsManagement adsManagement = new AdsManagement(inMemoryRepository);
+
         adsManagement.checkRepository(inMemoryRepository);
 
         Assertions.assertEquals(2, inMemoryRepository.getAll().size());
@@ -48,24 +48,44 @@ public class AdsManagementShould {
         Title title = new Title("title");
         Body body = new Body("body");
         Id id = new Id("1");
-        TimeServer timeServer = new TimeServer();
-
         Title title1 = new Title("Hola");
         Body body1 = new Body("Body1");
         Id id1 = new Id("2");
-        TimeServer timeserver1 = new TimeServer();
-
 
         Ad expectedAd = new Ad(title, body, new Date(2002, 11, 21), id);
-
         Ad ad = new Ad(title1, body1, new Date(2000, 11, 21), id1);
         InMemoryRepository inMemoryRepository = new InMemoryRepository();
         inMemoryRepository.save(id, expectedAd);
         inMemoryRepository.save(id1, ad);
-
         AdsManagement adsManagement = new AdsManagement(inMemoryRepository);
         adsManagement.cleanAds(new Date (2001, 8, 10), inMemoryRepository);
 
         Assertions.assertEquals(1, inMemoryRepository.getAll().size());
     }
+
+    @Test
+    void remove_unpopular_ads_when_they_arrive_to_100(){
+
+        Title title = new Title("title");
+        Body body = new Body("body");
+        Id id = new Id("1");
+
+        Title title1 = new Title("Hola");
+        Body body1 = new Body("Body1");
+        Id id1 = new Id("2");
+
+        Ad expectedAd = new Ad(title, body, new Date(), id);
+        Ad ad = new Ad(title1, body1, new Date(), id1);
+        InMemoryRepository inMemoryRepository = new InMemoryRepository();
+        inMemoryRepository.save(id, expectedAd);
+        inMemoryRepository.save(id1, ad);
+        inMemoryRepository.get(id);
+        inMemoryRepository.get(id);
+        AdsManagement adsManagement = new AdsManagement(inMemoryRepository);
+
+        adsManagement.cleanLessAccessedAds(inMemoryRepository);
+
+        Assertions.assertEquals( 1, inMemoryRepository.getAll().size());
+    }
+
 }
